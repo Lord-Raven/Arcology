@@ -2,7 +2,7 @@
 #   in which case these values can be managed in the UI.
 
 # The name of the stage.
-project_name: "Arcology Sim"
+project_name: "Arcology"
 
 # A short tagline to show in search.
 # tagline: "A base template for all stages."
@@ -73,10 +73,4 @@ state_schema:
 # extension_id is automatically generated on push with a new project;
 #    you should not make or set this value.
 # github_path will be added if it does not exist. It is the URL of the repo.
-
-
-github_path: 'https://github.com/Lord-Raven/Archology'
-
-
-extension_id: 'archology-1217c641c152'
 
