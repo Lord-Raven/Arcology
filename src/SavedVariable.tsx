@@ -1,4 +1,4 @@
-class SavedVariable<T> {
+export class SavedVariable<T> {
     private value: T;
 
     constructor(value: T) {
