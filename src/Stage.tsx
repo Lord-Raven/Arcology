@@ -21,7 +21,7 @@ export class Stage extends StageBase<InitStateType, ChatStateType, MessageStateT
     // Not saved:
     character: Character;
     player: User;
-    readonly theme = createTheme({
+    /*readonly theme = createTheme({
         palette: {
             primary: {
                 main: '#ffffeeff'
@@ -30,7 +30,7 @@ export class Stage extends StageBase<InitStateType, ChatStateType, MessageStateT
                 main: '#111111ff'
             }
         }
-    });
+    });*/
 
 
     constructor(data: InitialData<InitStateType, ChatStateType, MessageStateType, ConfigType>) {

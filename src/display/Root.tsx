@@ -1,5 +1,4 @@
 import React, {FC, useEffect, useState} from "react";
-import {ThemeProvider} from "@mui/material";
 import {TitleScreen} from "./TitleScreen";
 import {Stage} from "../Stage";
 import {ErrorProvider} from "./ErrorProvider";
@@ -28,13 +27,11 @@ export const Root: FC<RootProps> = ({ stage }) => {
             color: '#ffffff'
         }}>
             <ErrorProvider>
-                <ThemeProvider theme={stage().theme}>
                     {onMenu ? (
                         <TitleScreen stage={stage} setOnMenu={handleSetOnMenu}/>
                     ) : (
                         <></>
                     )}
-                </ThemeProvider>
             </ErrorProvider>
         </div>
     );
