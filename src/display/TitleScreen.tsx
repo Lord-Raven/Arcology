@@ -26,6 +26,8 @@ export const TitleScreen: FC<TitleScreenProps> = ({ stage, setOnMenu }) => {
                 setOnMenu(false);
         }).catch((err) => {
                 displayError(err.message);
+                setGenerating(false);
+                setOnMenu(true);
                 console.log(err);
         });
     };

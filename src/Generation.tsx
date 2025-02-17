@@ -5,10 +5,6 @@ import {Emotion} from "./enums/Emotion";
 
 const ART_STYLE = 'Messy oil painting, elaborate high-concept art, bold colors and strokes';
 
-function formatTextPrompt(input: string) {
-    return `${input.trim()}\n\n###FUTURE INSTRUCTION:\n`;
-}
-
 export async function generateInitialContent(stage: Stage, updateProgress: (progress: number, label: string) => void) {
     updateProgress(0, 'Initializing.');
     const aidePersona = await generateText(stage, {
@@ -102,7 +98,7 @@ export async function generateImage(stage: Stage, imageGenRequest: any) {
     return result?.url ?? '';
 }
 
-export async function redrawImage(stage: Stage, imageGenRequest: any) {
+export async function regenerateImage(stage: Stage, imageGenRequest: any) {
     let result = null;
     for (let tries = 3; tries > 0; tries--) {
         result = await stage.generator.imageToImage(imageGenRequest);
