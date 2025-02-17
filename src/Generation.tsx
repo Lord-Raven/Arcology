@@ -1,5 +1,8 @@
 import {Stage} from "./Stage";
 
+const ART_STYLE = 'Messy oil painting, elaborate high-concept art, bold colors and strokes';
+
+
 export async function generateInitialContent(stage: Stage) {
 
 }

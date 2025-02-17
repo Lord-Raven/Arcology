@@ -49,7 +49,7 @@ export class Stage extends StageBase<InitStateType, ChatStateType, MessageStateT
             districts: new SavedVariable<District[]>([])
         };
         // Read saved variable values:
-        this.readChatState(chatState);
+        //this.readChatState(chatState);
 
         this.character = characters[Object.keys(characters)[0]];
         this.player = users[Object.keys(users)[0]];
