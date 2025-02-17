@@ -3,7 +3,6 @@ import {StageBase, StageResponse, InitialData, Message, Character, User} from "@
 import {LoadResponse} from "@chub-ai/stages-ts/dist/types/load";
 import {createTheme} from "@mui/system";
 import {Root} from "./display/Root";
-import {SavedVariable} from './SavedVariable';
 
 type MessageStateType = any;
 
@@ -11,13 +10,15 @@ type ConfigType = any;
 
 type InitStateType = any;
 
-type ChatStateType = any;
+type ChatStateType = {
+    gameInProgress: boolean
+}
 
 export class Stage extends StageBase<InitStateType, ChatStateType, MessageStateType, ConfigType> {
 
 
     // Saved variables:
-    saveState: any;
+    saveState: ChatStateType;
     // Not saved:
     character: Character;
     player: User;
@@ -46,7 +47,7 @@ export class Stage extends StageBase<InitStateType, ChatStateType, MessageStateT
             chatState                              // @type: null | ChatStateType
         } = data;
         this.saveState = {
-            gameInProgress: new SavedVariable<boolean>(false)
+            gameInProgress: false
         };
         // Read saved variable values:
         //this.readChatState(chatState);
@@ -54,6 +55,7 @@ export class Stage extends StageBase<InitStateType, ChatStateType, MessageStateT
         this.character = characters[Object.keys(characters)[0]];
         this.player = users[Object.keys(users)[0]];
 
+        this.readChatState(chatState);
     }
 
     async load(): Promise<Partial<LoadResponse<InitStateType, ChatStateType, MessageStateType>>> {
@@ -68,13 +70,15 @@ export class Stage extends StageBase<InitStateType, ChatStateType, MessageStateT
 
     async setState(messageState: MessageStateType): Promise<void> { }
 
-    readChatState(chatState: ChatStateType) {
-        console.log('before');
-        console.log(this.saveState);
-        console.log(chatState);
-        this.saveState = {...this.saveState, chatState};
-        console.log('after');
-        console.log(chatState);
+    readChatState(chatState: ChatStateType|null) {
+        if (chatState) {
+            console.log('before');
+            console.log(this.saveState);
+            console.log(chatState);
+            this.saveState = {...this.saveState, ...chatState};
+            console.log('after');
+            console.log(chatState);
+        }
     }
 
     writeChatState(): ChatStateType {
