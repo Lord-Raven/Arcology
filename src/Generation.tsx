@@ -1,10 +1,56 @@
 import {Stage} from "./Stage";
+import {Person} from "./Person";
+import {AspectRatio} from "@chub-ai/stages-ts";
+import {Emotion} from "./enums/Emotion";
 
 const ART_STYLE = 'Messy oil painting, elaborate high-concept art, bold colors and strokes';
 
+function formatTextPrompt(input: string) {
+    return `${input.trim()}\n\n###FUTURE INSTRUCTION:\n`;
+}
 
-export async function generateInitialContent(stage: Stage) {
+export async function generateInitialContent(stage: Stage, updateProgress: (progress: number, label: string) => void) {
+    updateProgress(0, 'Initializing.');
+    const aidePersona = await generateText(stage, {
+        prompt:
+            new PromptBuilder()
+                .addHeader('Example',
+                    'NAME: Carolina Reaper\nDESCRIPTORS: Young woman, short, curvy, tomboyish look, spicy gothic appearance, short curly red hair, black duster, elaborate scythe, freckles, bright red eyes\n' +
+                    'PERSONALITY: Carolina is a surprisingly bubbly gothic assistant. She\'s a spunky, tough, bad-ass who can kill with wit and looks.')
+                .addHeader('Flavor Text', `${stage.character.description}\n${stage.character.personality}\n${stage.character.scenario}`)
+                .addHeader('Current Instruction', 'This is a preparatory response for a roleplay; study the FLAVOR TEXT and use it as inspiration to creatively define the persona for ' +
+                    'a HoloAide--a holographic assistant that will play a role in the upcoming narrative. This definition should follow this specific format:\n ' +
+                    'NAME: A name the persona goes by\n' +
+                    'DESCRIPTORS: A list of visual descriptors or booru-style tags that define the persona\'s appearance\n' +
+                    'PERSONALITY: A description of the persona\'s personality: accent, mannerisms, tics, likes, dislikes, etc.')
+                .build(),
+        min_tokens: 100, max_tokens: 200
+    });
+    console.log(aidePersona);
+    const aidePerson = buildPerson(aidePersona, 'HoloAide');
+    console.log(aidePerson);
+    if (aidePerson) {
+        stage.saveState.holoAide = aidePerson;
+    } else {
+        throw Error('Failed to generate HoloAide persona.');
+    }
+    updateProgress(50, 'Generating HoloAide image.');
+    const aideImage = await generateImage(stage, {
+        prompt: `(${ART_STYLE}), full body portrait, plain empty background, neutral expression, (${aidePerson.descriptors})`,
+        negative_prompt: 'special effects, background, scenery',
+        aspect_ratio: AspectRatio.WIDESCREEN_VERTICAL,
+        remove_background: true
+    });
+    if (aideImage) {
+        console.log(aideImage);
+        aidePerson.imageUrls[Emotion.neutral] = aideImage;
+    } else {
+        throw Error('Failed to generate HoloAide neutral image.');
+    }
 
+    updateProgress(100, 'Completed.');
+    stage.saveState.gameInProgress = true;
+    await stage.updateChatState();
 }
 
 /*export function buildDistillation(stage: Stage, baseCharacter: Character): string {
@@ -65,4 +111,35 @@ export async function redrawImage(stage: Stage, imageGenRequest: any) {
         }
     }
     return result?.url ?? '';
+}
+
+function buildPerson(input: string, role: string) {
+    const MAX_NAME_LENGTH = 30;
+    const nameRegex = /Name\s*[:\-]?\s*(.*)/i;
+    const descriptorsRegex = /Descriptors\s*[:\-]?\s*(.*)/i;
+    const personalityRegex = /Personality\s*[:\-]?\s*(.*)/i;
+    const nameMatches = input.match(nameRegex);
+    const descriptorsMatches = input.match(descriptorsRegex);
+    const personalityMatches = input.match(personalityRegex);
+
+    if (nameMatches && nameMatches.length > 1 && nameMatches[1].length < MAX_NAME_LENGTH && descriptorsMatches && descriptorsMatches.length > 1 && personalityMatches && personalityMatches.length > 1) {
+        console.log(`${nameMatches[1].trim()}:${descriptorsMatches[1].trim()}:${personalityMatches[1].trim()}`);
+        return new Person(nameMatches[1].trim(), role, descriptorsMatches[1].trim(), personalityMatches[1].trim());
+    }
+    return null;
+}
+
+class PromptBuilder {
+    private headers: { header: string, content: string }[] = [];
+
+    addHeader(header: string, content: string): this {
+        this.headers.push({header, content});
+        return this;
+    }
+
+    build(): string {
+        let result = this.headers.map(item => `###${item.header.toUpperCase()}:\n${item.content}`).join('\n\n');
+        result += '###FUTURE INSTRUCTION:\n';
+        return result;
+    }
 }

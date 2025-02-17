@@ -17,14 +17,17 @@ export const TitleScreen: FC<TitleScreenProps> = ({ stage, setOnMenu }) => {
     const [progressLabel, setProgressLabel] = useState<string>('');
     const {displayError} = useError();
 
+    const updateProgress = (progress: number, label: string) => {setProgress(progress);setProgressLabel(label)};
     const handleGenerateClick = () => {
         setConfirm(false);
         setGenerating(true);
-        generateInitialContent(stage()).then(() => {
-            displayError('Testing');
-            setGenerating(false);
-            setOnMenu(false);
-        })
+        generateInitialContent(stage(), updateProgress).then(() => {
+                setGenerating(false);
+                setOnMenu(false);
+        }).catch((err) => {
+                displayError(err.message);
+                console.log(err);
+        });
     };
 
     return (
