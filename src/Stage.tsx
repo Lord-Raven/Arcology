@@ -4,6 +4,7 @@ import {LoadResponse} from "@chub-ai/stages-ts/dist/types/load";
 import {createTheme} from "@mui/system";
 import {Root} from "./display/Root";
 import {Person} from "./Person";
+import {District} from "./District";
 
 type MessageStateType = any;
 
@@ -14,6 +15,7 @@ type InitStateType = any;
 type ChatStateType = {
     gameInProgress: boolean,
     holoAide: Person,
+    districts: District[]
 }
 
 export class Stage extends StageBase<InitStateType, ChatStateType, MessageStateType, ConfigType> {
@@ -50,7 +52,8 @@ export class Stage extends StageBase<InitStateType, ChatStateType, MessageStateT
         } = data;
         this.saveState = {
             gameInProgress: false,
-            holoAide: new Person('','','','')
+            holoAide: new Person('','','',''),
+            districts: [],
         };
         // Read saved variable values:
         //this.readChatState(chatState);
