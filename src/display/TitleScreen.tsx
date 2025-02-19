@@ -17,6 +17,7 @@ export const TitleScreen: FC<TitleScreenProps> = ({ stage, setOnMenu }) => {
     const [progress, setProgress] = useState<number>(0);
     const [progressLabel, setProgressLabel] = useState<string>('');
     const {displayError} = useError();
+    const buttonProps = {sx: {outline: 1, backgroundColor: '#00000088', color: 'primary', variant: 'h5'}}
 
     const updateProgress = (progress: number, label: string) => {setProgress(progress);setProgressLabel(label)};
     const handleGenerateClick = () => {
@@ -43,7 +44,7 @@ export const TitleScreen: FC<TitleScreenProps> = ({ stage, setOnMenu }) => {
             height: '100vh',
             color: '#ffffff'
         }}>
-            <div style={{display: 'flex', flexDirection: 'column', bottom: '2vh', gap: '2vh', height: '100vh', width: '100vw', alignItems: 'center'}}>
+            <div style={{display: 'flex', flexDirection: 'column', bottom: '2vh', gap: '2vh', height: '100vh', width: '100vw', alignItems: 'center', verticalAlign: 'middle'}}>
                 {generating ? (
                     <>
                         <Box sx={{backgroundColor: '#00000088', width: '80%'}} color={'primary'}>
@@ -55,26 +56,26 @@ export const TitleScreen: FC<TitleScreenProps> = ({ stage, setOnMenu }) => {
                     </>
                 ) : (
                     <>
-                        <Button style={{outline: 1, backgroundColor: '#00000088'}} color={'primary'}
+                        <Button {...buttonProps}
                                 startIcon={stage().saveState.gameInProgress ? <Replay/> : <ArrowForward/>}
                                 onClick={() => setConfirm(true)}>
-                            <Typography variant="h5" color='primary'>Start New Game</Typography>
+                            Start New Game
                         </Button>
                         {confirm && (
                             <div>
                                 {stage().saveState.gameInProgress ?
-                                    <Typography variant="h5" color='primary'>This will delete all progress and start over!</Typography> :
-                                    <Typography variant="h5" color='primary'>Warning! This could burn a _lot_ of tokens and may not be safe if you rely on a jailbreak.</Typography>}
+                                    <Typography {...buttonProps}>This will delete all progress and start over!</Typography> :
+                                    <Typography {...buttonProps}>Warning! This could burn a _lot_ of tokens and may not be safe if you rely on a jailbreak.</Typography>}
                                 <div style={{display: 'flex', justifyContent: 'center', flexDirection: 'row', gap: '1vw'}}>
-                                    <Button style={{outline: 1, backgroundColor: '#00000088'}} color={'primary'}
+                                    <Button {...buttonProps}
                                             startIcon={<Check/>}
                                             onClick={() => handleGenerateClick()}>
-                                        <Typography variant="h5" color='primary'>Okay!</Typography>
+                                        Okay!
                                     </Button>
-                                    <Button style={{outline: 1, backgroundColor: '#00000088'}} color={'primary'}
+                                    <Button {...buttonProps}
                                             startIcon={<Cancel/>}
                                             onClick={() => setConfirm(false)}>
-                                        <Typography variant="h5" color='primary'>No Way!</Typography>
+                                        No Way!
                                     </Button>
                                 </div>
                             </div>
