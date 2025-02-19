@@ -4,6 +4,7 @@ import {ArrowForward, Replay, Cancel, Check} from "@mui/icons-material";
 import {Stage} from "../Stage";
 import {generateInitialContent} from "../Generation";
 import {useError} from "./ErrorProvider";
+import hiveImageUrl from "../assets/hive.png";
 
 interface TitleScreenProps {
     stage: () => Stage;
@@ -33,7 +34,15 @@ export const TitleScreen: FC<TitleScreenProps> = ({ stage, setOnMenu }) => {
     };
 
     return (
-        <div style={{background: `radial-gradient(ellipse at center, #00000055 50%, #000000BB 90%)`, height: '100vh', width: '100vw'}}>
+        <div style={{
+            backgroundImage: `url(${hiveImageUrl})`,
+            backgroundPosition: 'center',
+            backgroundSize: 'cover',
+            backgroundRepeat: 'no-repeat',
+            width: '100vw',
+            height: '100vh',
+            color: '#ffffff'
+        }}>
             <div style={{display: 'flex', flexDirection: 'column', bottom: '2vh', gap: '2vh', height: '100vh', width: '100vw', alignItems: 'center'}}>
                 {generating ? (
                     <>
