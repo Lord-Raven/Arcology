@@ -1,6 +1,7 @@
 import {ReactElement} from "react";
 import {StageBase, StageResponse, InitialData, Message, Character, User} from "@chub-ai/stages-ts";
 import {LoadResponse} from "@chub-ai/stages-ts/dist/types/load";
+import {createTheme, Theme, ThemeProvider} from "@mui/material";
 import {Root} from "./display/Root";
 import {Person} from "./Person";
 import {District} from "./District";
@@ -25,6 +26,20 @@ export class Stage extends StageBase<InitStateType, ChatStateType, MessageStateT
     // Not saved:
     character: Character;
     player: User;
+    theme: Theme = createTheme({
+        components: {
+            MuiButton: {
+                styleOverrides: {
+                    root: {
+                        backgroundColor: '#00000088',
+                        '&:hover': {
+                            backgroundColor: '#000000CC',
+                        },
+                    },
+                },
+            },
+        },
+    });
 
 
     constructor(data: InitialData<InitStateType, ChatStateType, MessageStateType, ConfigType>) {
@@ -114,7 +129,9 @@ export class Stage extends StageBase<InitStateType, ChatStateType, MessageStateT
                     display: 'grid',
                     alignItems: 'stretch'
                 }}>
-                    <Root stage={() => {return this}}/>
+                    <ThemeProvider theme={this.theme}>
+                        <Root stage={() => {return this}}/>
+                    </ThemeProvider>
                 </div>;
     }
 
