@@ -1,7 +1,7 @@
 import {ReactElement} from "react";
 import {StageBase, StageResponse, InitialData, Message, Character, User} from "@chub-ai/stages-ts";
 import {LoadResponse} from "@chub-ai/stages-ts/dist/types/load";
-import {createTheme} from "@mui/system";
+import {createTheme, ThemeProvider} from "@mui/system";
 import {Root} from "./display/Root";
 import {Person} from "./Person";
 import {District} from "./District";
@@ -26,7 +26,7 @@ export class Stage extends StageBase<InitStateType, ChatStateType, MessageStateT
     // Not saved:
     character: Character;
     player: User;
-    /*readonly theme = createTheme({
+    readonly theme = createTheme({
         palette: {
             primary: {
                 main: '#ffffeeff'
@@ -35,7 +35,7 @@ export class Stage extends StageBase<InitStateType, ChatStateType, MessageStateT
                 main: '#111111ff'
             }
         }
-    });*/
+    });
 
 
     constructor(data: InitialData<InitStateType, ChatStateType, MessageStateType, ConfigType>) {
@@ -125,7 +125,9 @@ export class Stage extends StageBase<InitStateType, ChatStateType, MessageStateT
                     display: 'grid',
                     alignItems: 'stretch'
                 }}>
-                    <Root stage={() => {return this}}/>
+                    <ThemeProvider theme={this.theme}>
+                        <Root stage={() => {return this}}/>
+                    </ThemeProvider>
                 </div>;
     }
 
