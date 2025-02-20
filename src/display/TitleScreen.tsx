@@ -17,7 +17,7 @@ export const TitleScreen: FC<TitleScreenProps> = ({ stage, setOnMenu }) => {
     const [progress, setProgress] = useState<number>(0);
     const [progressLabel, setProgressLabel] = useState<string>('');
     const {displayError} = useError();
-    const buttonProps = {backgroundColor: '#FF0000', outline: 1, typography: 'h4', m: 1};
+    const buttonProps = {backgroundColor: 'primary.main', outline: 1, typography: 'h5', m: 1};
 
     const updateProgress = (progress: number, label: string) => {setProgress(progress);setProgressLabel(label)};
     const handleGenerateClick = () => {
