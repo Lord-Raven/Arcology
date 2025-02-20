@@ -129,9 +129,7 @@ export class Stage extends StageBase<InitStateType, ChatStateType, MessageStateT
                     display: 'grid',
                     alignItems: 'stretch'
                 }}>
-                    <ThemeProvider theme={this.theme}>
-                        <Root stage={() => {return this}}/>
-                    </ThemeProvider>
+                    <Root stage={() => {return this}}/>
                 </div>;
     }
 
