@@ -17,7 +17,7 @@ export const TitleScreen: FC<TitleScreenProps> = ({ stage, setOnMenu }) => {
     const [progress, setProgress] = useState<number>(0);
     const [progressLabel, setProgressLabel] = useState<string>('');
     const {displayError} = useError();
-    const buttonProps = {sx: {outline: 1, backgroundColor: '#000000CC', color: 'primary', typography: 'h3', m: 1}};
+    const buttonProps = {outline: 1, backgroundColor: '#000000CC', color: 'primary', typography: 'h3', m: 1};
 
     const updateProgress = (progress: number, label: string) => {setProgress(progress);setProgressLabel(label)};
     const handleGenerateClick = () => {
@@ -57,7 +57,7 @@ export const TitleScreen: FC<TitleScreenProps> = ({ stage, setOnMenu }) => {
                     </>
                 ) : (
                     <>
-                        <Button {...buttonProps}
+                        <Button sx={{...buttonProps}}
                                 startIcon={stage().saveState.gameInProgress ? <Replay/> : <ArrowForward/>}
                                 onClick={() => setConfirm(true)}>
                             Start New Game
@@ -68,12 +68,12 @@ export const TitleScreen: FC<TitleScreenProps> = ({ stage, setOnMenu }) => {
                                     <Typography {...buttonProps}>This will delete all progress and start over!</Typography> :
                                     <Typography {...buttonProps}>Warning! This could burn a _lot_ of tokens and may not be safe if you rely on a jailbreak.</Typography>}
                                 <div style={{display: 'flex', justifyContent: 'center', flexDirection: 'row', gap: '1vw'}}>
-                                    <Button {...buttonProps}
+                                    <Button sx={{...buttonProps}}
                                             startIcon={<Check/>}
                                             onClick={() => handleGenerateClick()}>
                                         Okay!
                                     </Button>
-                                    <Button {...buttonProps}
+                                    <Button sx={{...buttonProps}}
                                             startIcon={<Cancel/>}
                                             onClick={() => setConfirm(false)}>
                                         No Way!
