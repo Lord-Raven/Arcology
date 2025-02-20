@@ -57,7 +57,7 @@ export const TitleScreen: FC<TitleScreenProps> = ({ stage, setOnMenu }) => {
                     </>
                 ) : (
                     <>
-                        <Button sx={{...buttonProps}}
+                        <Button style={{...buttonProps}}
                                 startIcon={stage().saveState.gameInProgress ? <Replay/> : <ArrowForward/>}
                                 onClick={() => setConfirm(true)}>
                             Start New Game
@@ -65,15 +65,15 @@ export const TitleScreen: FC<TitleScreenProps> = ({ stage, setOnMenu }) => {
                         {confirm && (
                             <div>
                                 {stage().saveState.gameInProgress ?
-                                    <Typography {...buttonProps}>This will delete all progress and start over!</Typography> :
-                                    <Typography {...buttonProps}>Warning! This could burn a _lot_ of tokens and may not be safe if you rely on a jailbreak.</Typography>}
+                                    <Typography sx={{...buttonProps}}>This will delete all progress and start over!</Typography> :
+                                    <Typography sx={{...buttonProps}}>Warning! This could burn a _lot_ of tokens and may not be safe if you rely on a jailbreak.</Typography>}
                                 <div style={{display: 'flex', justifyContent: 'center', flexDirection: 'row', gap: '1vw'}}>
-                                    <Button sx={{...buttonProps}}
+                                    <Button style={{...buttonProps}}
                                             startIcon={<Check/>}
                                             onClick={() => handleGenerateClick()}>
                                         Okay!
                                     </Button>
-                                    <Button sx={{...buttonProps}}
+                                    <Button style={{...buttonProps}}
                                             startIcon={<Cancel/>}
                                             onClick={() => setConfirm(false)}>
                                         No Way!
