@@ -1,7 +1,7 @@
 import {ReactRunner} from "@chub-ai/stages-ts";
 import {Stage} from "./Stage";
 import {TestStageRunner} from "./TestRunner";
-import {createTheme, Theme, ThemeProvider} from "@mui/system";
+import {createTheme, Theme, ThemeProvider} from "@mui/material";
 
 const theme: Theme = createTheme({
   components: {
