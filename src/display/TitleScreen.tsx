@@ -57,7 +57,7 @@ export const TitleScreen: FC<TitleScreenProps> = ({ stage, setOnMenu }) => {
                     </>
                 ) : (
                     <>
-                        <Button style={{...buttonProps}}
+                        <Button sx={{...buttonProps}} style={{backgroundColor: '#00000088'}}
                                 startIcon={stage().saveState.gameInProgress ? <Replay/> : <ArrowForward/>}
                                 onClick={() => setConfirm(true)}>
                             Start New Game
@@ -68,7 +68,7 @@ export const TitleScreen: FC<TitleScreenProps> = ({ stage, setOnMenu }) => {
                                     <Typography sx={{...buttonProps}}>This will delete all progress and start over!</Typography> :
                                     <Typography sx={{...buttonProps}}>Warning! This could burn a _lot_ of tokens and may not be safe if you rely on a jailbreak.</Typography>}
                                 <div style={{display: 'flex', justifyContent: 'center', flexDirection: 'row', gap: '1vw'}}>
-                                    <Button style={{...buttonProps}}
+                                    <Button sx={{...buttonProps}}
                                             startIcon={<Check/>}
                                             onClick={() => handleGenerateClick()}>
                                         Okay!
