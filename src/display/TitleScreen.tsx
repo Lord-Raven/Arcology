@@ -53,11 +53,11 @@ export const TitleScreen: FC<TitleScreenProps> = ({ stage, setOnMenu }) => {
                     </>
                 ) : (
                     <>
-                        <Button style={{backgroundColor: '#00000088'}}
+                        <Button sx={{...buttonProps}} style={{backgroundColor: '#00000088'}}
                                 startIcon={stage().saveState.gameInProgress ? <Replay/> : <ArrowForward/>}
                                 onClick={() => setConfirm(true)}>
-                            <Typography sx={{...buttonProps}}>
-                                Start New Game?
+                            <Typography style={{backgroundColor: '#00000088'}}>
+                                Start New Game
                             </Typography>
                         </Button>
                         {confirm && (
