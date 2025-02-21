@@ -43,10 +43,9 @@ export const TitleScreen: FC<TitleScreenProps> = ({ stage, setOnMenu }) => {
             width: '100vw',
             height: '100vh',
             color: '#ffffff',
-            verticalAlign: 'middle',
             zIndex: '1'
         }}>
-            <div style={{display: 'flex', flexDirection: 'column', gap: '2vh', width: '100vw', alignItems: 'center', zIndex: '10'}}>
+            <div style={{display: 'flex', flexDirection: 'column', gap: '2vh', height: '100vh', width: '100vw', justifyContent: 'center', alignItems: 'center', zIndex: '10'}}>
                 {generating ? (
                     <>
                         <Box sx={{backgroundColor: '#00000088', width: '80%'}} color={'primary'}>
