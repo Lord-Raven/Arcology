@@ -105,6 +105,8 @@ export class Stage extends StageBase<InitStateType, ChatStateType, MessageStateT
     }
 
     async updateChatState() {
+        console.log('updateChatState');
+        console.log(this.saveState);
         await this.messenger.updateChatState(this.writeChatState());
     }
 
