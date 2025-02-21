@@ -2,7 +2,8 @@ import {Stage} from "./Stage";
 import {Person} from "./Person";
 import {AspectRatio} from "@chub-ai/stages-ts";
 import {Emotion} from "./enums/Emotion";
-import {District, INITIAL_DISTRICTS} from "./District";
+import {INITIAL_DISTRICTS} from "./District";
+import {INITIAL_SCENES} from "./display/Scene";
 
 const ART_STYLE = 'Messy oil painting, elaborate high-concept art, bold colors and strokes, sci-fi meets lo-fi';
 
@@ -10,7 +11,7 @@ export async function generateInitialContent(stage: Stage, updateProgress: (prog
     updateProgress(0, 'Initializing.');
     stage.saveState.districts = INITIAL_DISTRICTS.map(district => district.clone());
 
-    updateProgress(5, 'Generating Holo-Aide from card.');
+    updateProgress(5, 'Generating Holo-Aide from Card.');
     const aidePersona = await generateText(stage, {
         prompt:
             new PromptBuilder()
@@ -35,7 +36,7 @@ export async function generateInitialContent(stage: Stage, updateProgress: (prog
     } else {
         throw Error('Failed to generate Holo-Aide persona.');
     }
-    updateProgress(50, 'Generating Holo-Aide image.');
+    updateProgress(10, 'Generating Holo-Aide Image.');
     const aideImage = await generateImage(stage, {
         prompt: `(${ART_STYLE}), full body portrait, plain empty background, neutral expression, (holographic), (${aidePerson.descriptors})`,
         negative_prompt: 'special effects, background, scenery',
@@ -47,6 +48,26 @@ export async function generateInitialContent(stage: Stage, updateProgress: (prog
         aidePerson.imageUrls[Emotion.neutral] = aideImage;
     } else {
         throw Error('Failed to generate Holo-Aide neutral image.');
+    }
+
+    stage.saveState.scenes = INITIAL_SCENES.map(scene => scene.clone());
+
+    const increment = (90 - 10) / stage.saveState.scenes.length;
+    for (let index = 0; index < stage.saveState.scenes.length; index++) {
+        const scene = stage.saveState.scenes[index];
+        updateProgress(10 + (index + 1) * increment, `Generating Imagery for ${scene.name}.`);
+        const sceneImage = await generateImage(stage, {
+            prompt: `(${ART_STYLE}). ${scene.essentialDescriptors}. ${scene.description}.`,
+            negative_prompt: 'people',
+            aspect_ratio: AspectRatio.WIDESCREEN_HORIZONTAL,
+            remove_background: false
+        });
+        if (sceneImage) {
+            console.log(sceneImage);
+            scene.imageUrl = sceneImage;
+        } else {
+            throw Error(`Failed to generate an image for ${scene.name}.`);
+        }
     }
 
     updateProgress(100, 'Completed.');

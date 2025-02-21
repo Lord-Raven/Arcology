@@ -42,8 +42,6 @@ export const TitleScreen: FC<TitleScreenProps> = ({ stage, setOnMenu }) => {
             backgroundRepeat: 'no-repeat',
             width: '100vw',
             height: '100vh',
-            color: '#ffffff',
-            zIndex: '1'
         }}>
             <div style={{display: 'flex', flexDirection: 'column', gap: '2vh', height: '100vh', width: '100vw', justifyContent: 'center', alignItems: 'center', zIndex: '10'}}>
                 {generating ? (

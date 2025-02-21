@@ -5,6 +5,7 @@ import {createTheme, ThemeProvider} from "@mui/material";
 import {Root} from "./display/Root";
 import {Person} from "./Person";
 import {District} from "./District";
+import {Scene} from "./display/Scene";
 
 type MessageStateType = any;
 
@@ -15,11 +16,11 @@ type InitStateType = any;
 type ChatStateType = {
     gameInProgress: boolean,
     holoAide: Person,
-    districts: District[]
+    districts: District[],
+    scenes: Scene[],
 }
 
 export class Stage extends StageBase<InitStateType, ChatStateType, MessageStateType, ConfigType> {
-
 
     // Saved variables:
     saveState: ChatStateType;
@@ -66,6 +67,7 @@ export class Stage extends StageBase<InitStateType, ChatStateType, MessageStateT
             gameInProgress: false,
             holoAide: new Person('','','',''),
             districts: [],
+            scenes: [],
         };
         // Read saved variable values:
         //this.readChatState(chatState);
