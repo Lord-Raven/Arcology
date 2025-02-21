@@ -22,8 +22,8 @@ const SceneImage = ({scene, clipPath, left, top}: SceneImageProps) => (
             position: 'relative',
             left: `${left}%`,
             top: `${top}%`,
-            width: '3vh',
-            height: `${20 * RATIO}vh`,
+            width: `${20 * RATIO}vh`,
+            height: `3vh`,
         }}
         initial={{opacity: 0}}
         animate={{opacity: 1}}
