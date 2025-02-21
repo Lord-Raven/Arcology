@@ -35,9 +35,14 @@ export const Manager: FC<ManagerProps> = ({ stage }) => {
             backgroundPosition: 'center',
             backgroundSize: 'cover',
             backgroundRepeat: 'no-repeat',
-            width: '100vw',
-            height: '100vh',
         }}>
+            {stage().saveState.scenes.map((scene) => (
+                <MaskedImage
+                    key={scene.name}
+                    src={scene.imageUrl}
+                    clipPath="polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)"
+                />
+            ))}
         </div>
     );
 }

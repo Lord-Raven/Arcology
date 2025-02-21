@@ -46,7 +46,7 @@ export const TitleScreen: FC<TitleScreenProps> = ({ stage, setOnMenu }) => {
             <div style={{display: 'flex', flexDirection: 'column', gap: '2vh', height: '100vh', width: '100vw', justifyContent: 'center', alignItems: 'center', zIndex: '10'}}>
                 {generating ? (
                     <>
-                        <Box sx={{backgroundColor: '#00000088', width: '80%'}} color={'primary'}>
+                        <Box sx={{backgroundColor: '#00000088', width: '80%', color: 'primary', variety: 'h5'}} color={'primary'}>
                             <Typography>
                                 {progress}% - {progressLabel}
                             </Typography>
@@ -63,8 +63,8 @@ export const TitleScreen: FC<TitleScreenProps> = ({ stage, setOnMenu }) => {
                         {confirm && (
                             <div>
                                 {stage().saveState.gameInProgress ?
-                                    <Typography sx={{backgroundColor: '#00000088'}}>This will delete all progress and start over!</Typography> :
-                                    <Typography sx={{backgroundColor: '#00000088'}}>Warning! This could burn a _lot_ of tokens and may not be safe if you rely on a jailbreak.</Typography>}
+                                    <Typography sx={{backgroundColor: '#00000088', color: 'primary', variety: 'h5'}}>This will delete all progress and start over!</Typography> :
+                                    <Typography sx={{backgroundColor: '#00000088', color: 'primary', variety: 'h5'}}>Warning! This could burn a _lot_ of tokens and may not be safe if you rely on a jailbreak.</Typography>}
                                 <div style={{display: 'flex', justifyContent: 'center', flexDirection: 'row', gap: '1vw'}}>
                                     <Button sx={{...buttonProps}}
                                             startIcon={<Check/>}
