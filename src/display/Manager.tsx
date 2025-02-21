@@ -17,7 +17,6 @@ const MaskedImage = ({src, clipPath }: MaskedImageProps) => (
             height: '100%',
             backgroundImage: `${src}`,
             backgroundSize: 'cover',
-            clipPath: clipPath,
         }}
     />
 );
@@ -31,12 +30,13 @@ export const Manager: FC<ManagerProps> = ({ stage }) => {
 
     return (
         <div style={{
+            width: '100%',
+            height: '100%',
             backgroundImage: `url(${hiveImageUrl})`,
             backgroundPosition: 'center',
             backgroundSize: 'cover',
             backgroundRepeat: 'no-repeat',
         }}>
-            Manager.
             {stage().saveState.scenes.map((scene) => (
                 <MaskedImage
                     key={scene.name}
