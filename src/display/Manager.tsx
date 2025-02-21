@@ -15,7 +15,7 @@ const MaskedImage = ({src, clipPath }: MaskedImageProps) => (
         sx={{
             width: '100%',
             height: '100%',
-            backgroundImage: `url(${src})`,
+            backgroundImage: `${src}`,
             backgroundSize: 'cover',
             clipPath: clipPath,
         }}
@@ -36,13 +36,6 @@ export const Manager: FC<ManagerProps> = ({ stage }) => {
             backgroundSize: 'cover',
             backgroundRepeat: 'no-repeat',
         }}>
-            {stage().saveState.scenes.map((scene) => (
-                <MaskedImage
-                    key={scene.name}
-                    src={scene.imageUrl}
-                    clipPath="polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)"
-                />
-            ))}
         </div>
     );
 }

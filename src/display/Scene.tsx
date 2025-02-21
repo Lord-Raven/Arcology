@@ -22,5 +22,5 @@ export const INITIAL_SCENES: Scene[] =
         new Scene(
             'Penthouse Bedroom',
             'Luxurious bedroom with a modern, cyberpunk aesthetic. Dominated by a massive bed.',
-            'Large penthouse bedroom overlooking a desolate desert landscape from very high up.')
+            'Expansive penthouse bedroom overlooking a desolate desert landscape from extremely high up.')
     ];

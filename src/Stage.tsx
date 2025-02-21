@@ -69,13 +69,12 @@ export class Stage extends StageBase<InitStateType, ChatStateType, MessageStateT
             districts: [],
             scenes: [],
         };
-        // Read saved variable values:
-        //this.readChatState(chatState);
 
         this.character = characters[Object.keys(characters)[0]];
         this.player = users[Object.keys(users)[0]];
 
         this.readChatState(chatState);
+        console.log(this.saveState);
     }
 
     async load(): Promise<Partial<LoadResponse<InitStateType, ChatStateType, MessageStateType>>> {
@@ -97,7 +96,7 @@ export class Stage extends StageBase<InitStateType, ChatStateType, MessageStateT
             console.log(chatState);
             this.saveState = {...this.saveState, ...chatState};
             console.log('after');
-            console.log(chatState);
+            console.log(this.saveState);
         }
     }
 
