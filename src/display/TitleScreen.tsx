@@ -36,8 +36,13 @@ export const TitleScreen: FC<TitleScreenProps> = ({ stage, setOnMenu }) => {
 
     return (
         <div style={{
+            backgroundImage: `url(${hiveImageUrl})`,
+            backgroundPosition: 'center',
+            backgroundSize: 'cover',
+            backgroundRepeat: 'no-repeat',
             width: '100vw',
             height: '100vh',
+            color: '#ffffff',
             verticalAlign: 'middle',
             zIndex: '1'
         }}>
@@ -53,12 +58,10 @@ export const TitleScreen: FC<TitleScreenProps> = ({ stage, setOnMenu }) => {
                     </>
                 ) : (
                     <>
-                        <Button sx={{...buttonProps}} style={{backgroundColor: '#00000088'}}
+                        <Button style={{outline: 1, backgroundColor: '#00000088'}} color={'primary'}
                                 startIcon={stage().saveState.gameInProgress ? <Replay/> : <ArrowForward/>}
                                 onClick={() => setConfirm(true)}>
-                            <Typography style={{backgroundColor: '#00000088'}}>
-                                Start New Game
-                            </Typography>
+                            <Typography variant="h5" color='primary'>Start New Game</Typography>
                         </Button>
                         {confirm && (
                             <div>
