@@ -16,8 +16,8 @@ export const TitleScreen: FC<TitleScreenProps> = ({ stage, setOnMenu }) => {
     const [confirm, setConfirm] = useState<boolean>(false);
     const [progress, setProgress] = useState<number>(0);
     const [progressLabel, setProgressLabel] = useState<string>('');
-    //const {displayError} = useError();
-    const buttonProps = {backgroundColor: '#00000088', outline: 1, typography: 'h5', m: 1};
+    const {displayError} = useError();
+    const buttonProps = {outline: 1, typography: 'h5', m: 1};
 
     const updateProgress = (progress: number, label: string) => {setProgress(progress);setProgressLabel(label)};
     const handleGenerateClick = () => {
@@ -27,7 +27,7 @@ export const TitleScreen: FC<TitleScreenProps> = ({ stage, setOnMenu }) => {
                 setGenerating(false);
                 setOnMenu(false);
         }).catch((err) => {
-                //displayError(err.message);
+                displayError(err.message);
                 setGenerating(false);
                 setOnMenu(true);
                 console.log(err);
@@ -58,23 +58,23 @@ export const TitleScreen: FC<TitleScreenProps> = ({ stage, setOnMenu }) => {
                     </>
                 ) : (
                     <>
-                        <Button style={{outline: 1, backgroundColor: '#00000088'}} color={'primary'}
+                        <Button sx={{...buttonProps}} color={'primary'}
                                 startIcon={stage().saveState.gameInProgress ? <Replay/> : <ArrowForward/>}
                                 onClick={() => setConfirm(true)}>
-                            <Typography variant="h5" color='primary'>Start New Game</Typography>
+                            Start New Game
                         </Button>
                         {confirm && (
                             <div>
                                 {stage().saveState.gameInProgress ?
-                                    <Typography sx={{...buttonProps}}>This will delete all progress and start over!</Typography> :
-                                    <Typography sx={{...buttonProps}}>Warning! This could burn a _lot_ of tokens and may not be safe if you rely on a jailbreak.</Typography>}
+                                    <Typography sx={{backgroundColor: '#00000088'}}>This will delete all progress and start over!</Typography> :
+                                    <Typography sx={{backgroundColor: '#00000088'}}>Warning! This could burn a _lot_ of tokens and may not be safe if you rely on a jailbreak.</Typography>}
                                 <div style={{display: 'flex', justifyContent: 'center', flexDirection: 'row', gap: '1vw'}}>
                                     <Button sx={{...buttonProps}}
                                             startIcon={<Check/>}
                                             onClick={() => handleGenerateClick()}>
                                         Okay!
                                     </Button>
-                                    <Button style={{...buttonProps}}
+                                    <Button sx={{...buttonProps}}
                                             startIcon={<Cancel/>}
                                             onClick={() => setConfirm(false)}>
                                         No Way!
@@ -83,10 +83,10 @@ export const TitleScreen: FC<TitleScreenProps> = ({ stage, setOnMenu }) => {
                             </div>
                         )}
                         {stage().saveState.gameInProgress && (
-                            <Button style={{outline: 1, backgroundColor: '#00000088'}} color={'primary'}
+                            <Button sx={{...buttonProps}} color={'primary'}
                                     startIcon={<ArrowForward/>}
                                     onClick={() => setOnMenu(false)}>
-                                <Typography variant="h5" color='primary'>Continue</Typography>
+                                Continue
                             </Button>
                         )}
                     </>

@@ -26,7 +26,7 @@ export class Stage extends StageBase<InitStateType, ChatStateType, MessageStateT
     // Not saved:
     character: Character;
     player: User;
-    /*theme: Theme = createTheme({
+    readonly theme = createTheme({
         components: {
             MuiButton: {
                 styleOverrides: {
@@ -39,8 +39,6 @@ export class Stage extends StageBase<InitStateType, ChatStateType, MessageStateT
                 },
             },
         },
-    });*/
-    readonly theme = createTheme({
         palette: {
             primary: {
                 main: '#ffffeeff'

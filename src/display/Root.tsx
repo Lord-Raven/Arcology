@@ -17,15 +17,12 @@ export const Root: FC<RootProps> = ({ stage }) => {
     useEffect(() => {}, [onMenu]);
 
     return (
-        <div style={{
-            width: '100vw',
-            height: '100vh'
-        }}>
-                    {onMenu ? (
-                        <TitleScreen stage={stage} setOnMenu={handleSetOnMenu}/>
-                    ) : (
-                        <></>
-                    )}
-        </div>
+        <ErrorProvider>
+            {onMenu ? (
+                <TitleScreen stage={stage} setOnMenu={handleSetOnMenu}/>
+            ) : (
+                <></>
+            )}
+        </ErrorProvider>
     );
 }
