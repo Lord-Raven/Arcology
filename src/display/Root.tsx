@@ -18,21 +18,14 @@ export const Root: FC<RootProps> = ({ stage }) => {
 
     return (
         <div style={{
-            /*backgroundImage: stage().barImageUrl ? `url(${stage().barImageUrl})` : '',
-            backgroundPosition: 'center',
-            backgroundSize: 'cover',
-            backgroundRepeat: 'no-repeat',*/
             width: '100vw',
-            height: '100vh',
-            color: '#ffffff'
+            height: '100vh'
         }}>
-            <ErrorProvider>
                     {onMenu ? (
                         <TitleScreen stage={stage} setOnMenu={handleSetOnMenu}/>
                     ) : (
                         <></>
                     )}
-            </ErrorProvider>
         </div>
     );
 }

@@ -1,7 +1,7 @@
 import {ReactElement} from "react";
 import {StageBase, StageResponse, InitialData, Message, Character, User} from "@chub-ai/stages-ts";
 import {LoadResponse} from "@chub-ai/stages-ts/dist/types/load";
-import {createTheme, Theme, ThemeProvider} from "@mui/material";
+import {createTheme, ThemeProvider} from "@mui/material";
 import {Root} from "./display/Root";
 import {Person} from "./Person";
 import {District} from "./District";
