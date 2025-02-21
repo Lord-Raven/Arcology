@@ -23,7 +23,7 @@ export const Root: FC<RootProps> = ({ stage }) => {
                 <TitleScreen stage={stage} setOnMenu={handleSetOnMenu}/>
             ) : (
                 <div style={{display: 'flex', flexDirection: 'row', width: '100vw', height: '100vh'}}>
-                    <div style={{width: '70vw', height: '100vh'}}></div>
+                    <div style={{width: '70vw', height: '100vh'}}>Testing.</div>
                     <div style={{width: '30vw', height: '100vh'}}>
                         <Manager stage={stage}/>
                     </div>
