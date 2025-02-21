@@ -26,7 +26,7 @@ export class Stage extends StageBase<InitStateType, ChatStateType, MessageStateT
     // Not saved:
     character: Character;
     player: User;
-    theme: Theme = createTheme({
+    /*theme: Theme = createTheme({
         components: {
             MuiButton: {
                 styleOverrides: {
@@ -39,6 +39,16 @@ export class Stage extends StageBase<InitStateType, ChatStateType, MessageStateT
                 },
             },
         },
+    });*/
+    readonly theme = createTheme({
+        palette: {
+            primary: {
+                main: '#ffffeeff'
+            },
+            secondary: {
+                main: '#111111ff'
+            }
+        }
     });
 
 
@@ -129,7 +139,9 @@ export class Stage extends StageBase<InitStateType, ChatStateType, MessageStateT
                     display: 'grid',
                     alignItems: 'stretch'
                 }}>
-                    <Root stage={() => {return this}}/>
+                    <ThemeProvider theme={this.theme}>
+                        <Root stage={() => {return this}}/>
+                    </ThemeProvider>
                 </div>;
     }
 
