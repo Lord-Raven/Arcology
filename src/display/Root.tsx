@@ -22,12 +22,12 @@ export const Root: FC<RootProps> = ({ stage }) => {
             {onMenu ? (
                 <TitleScreen stage={stage} setOnMenu={handleSetOnMenu}/>
             ) : (
-                <>
-                    <div style={{width: '70%', height: '100vh'}}></div>
-                    <div style={{width: '30%', height: '100vh'}}>
+                <div style={{display: 'flex', flexDirection: 'row', width: '100vw', height: '100vh'}}>
+                    <div style={{width: '70vw', height: '100vh'}}></div>
+                    <div style={{width: '30vw', height: '100vh'}}>
                         <Manager stage={stage}/>
                     </div>
-                </>
+                </div>
             )}
         </ErrorProvider>
     );
