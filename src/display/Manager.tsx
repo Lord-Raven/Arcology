@@ -13,20 +13,23 @@ interface SceneImageProps {
     top: number;
 }
 
-const SceneImage = ({scene, clipPath, left, top }: SceneImageProps) => (
+const RATIO = 1.75;
+
+const SceneImage = ({scene, clipPath, left, top}: SceneImageProps) => (
     <motion.div
         key={scene.name}
         style={{
             position: 'relative',
             left: `${left}%`,
             top: `${top}%`,
-            transform: 'translate(-50%, -50%)'
+            width: '3vh',
+            height: `${20 * RATIO}vh`,
         }}
         initial={{opacity: 0}}
         animate={{opacity: 1}}
         transition={{duration: 0.5}}
     >
-        <img src={scene.imageUrl} alt={scene.name} style={{maxWidth: '100px', maxHeight: '100px'}} />
+        <img src={scene.imageUrl} alt={scene.name} style={{width: '100%', height: '100%', transform: 'translate(-50%, 0%)'}} />
     </motion.div>
 );
 
@@ -49,7 +52,7 @@ export const Manager: FC<ManagerProps> = ({ stage }) => {
             {stage().saveState.scenes.map((scene) => (
                 <SceneImage
                     scene={scene}
-                    top={30}
+                    top={6}
                     left={50}
                     clipPath="polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)"
                 />
