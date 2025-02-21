@@ -16,7 +16,7 @@ export const TitleScreen: FC<TitleScreenProps> = ({ stage, setOnMenu }) => {
     const [confirm, setConfirm] = useState<boolean>(false);
     const [progress, setProgress] = useState<number>(0);
     const [progressLabel, setProgressLabel] = useState<string>('');
-    const {displayError} = useError();
+    //const {displayError} = useError();
     const buttonProps = {backgroundColor: '#00000088', outline: 1, typography: 'h5', m: 1};
 
     const updateProgress = (progress: number, label: string) => {setProgress(progress);setProgressLabel(label)};
@@ -27,7 +27,7 @@ export const TitleScreen: FC<TitleScreenProps> = ({ stage, setOnMenu }) => {
                 setGenerating(false);
                 setOnMenu(false);
         }).catch((err) => {
-                displayError(err.message);
+                //displayError(err.message);
                 setGenerating(false);
                 setOnMenu(true);
                 console.log(err);
