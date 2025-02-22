@@ -15,7 +15,7 @@ export async function generateInitialContent(stage: Stage, updateProgress: (prog
     const aidePersona = await generateText(stage, {
         prompt:
             new PromptBuilder()
-                .addHeader('Setting', 'The Hive is a thriving post-apocalyptic cyberpunk arcology.')
+                .addHeader('Setting', 'A thriving, vibrant, yet dangerous post-apocalyptic cyberpunk arcology called The Hive.')
                 .addHeader('Example',
                     'NAME: Carolina Reaper\nDESCRIPTORS: Young woman, short, curvy, tomboyish look, spicy gothic appearance, short curly red hair, black duster, elaborate scythe, freckles, bright red eyes\n' +
                     'PERSONALITY: Carolina is a surprisingly bubbly gothic assistant. She\'s a spunky, tough, bad-ass who can kill with wit and looks.')
@@ -38,7 +38,7 @@ export async function generateInitialContent(stage: Stage, updateProgress: (prog
     }
     updateProgress(10, 'Generating Holo-Aide Image.');
     const aideImage = await generateImage(stage, {
-        prompt: `(${ART_STYLE}), full body portrait, plain empty background, neutral expression, (holographic), (${aidePerson.descriptors})`,
+        prompt: `(${ART_STYLE}), full body portrait, plain empty background, neutral expression, (holographic, semi-transparent appearance), (${aidePerson.descriptors})`,
         negative_prompt: 'special effects, background, scenery',
         aspect_ratio: AspectRatio.WIDESCREEN_VERTICAL,
         remove_background: true

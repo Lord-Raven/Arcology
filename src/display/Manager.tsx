@@ -51,8 +51,8 @@ export const Manager: FC<ManagerProps> = ({ stage }) => {
             {stage().saveState.districts.map(district => stage().saveState.scenes.find(scene => scene.name == district.defaultSceneId)).map((scene, index) =>
                 scene ? <SceneImage
                         scene={scene}
-                        top={6.5 * (index + 1)}
-                        left={50}
+                        top={6.5 + 4 * (10 - index)}
+                        left={85}
                         clipPath="polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)"
                 /> : <></>
             )}
