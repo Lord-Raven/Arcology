@@ -83,7 +83,7 @@ export class Stage extends StageBase<InitStateType, ChatStateType, MessageStateT
             success: true,
             error: null,
             initState: null,
-            chatState: null,
+            chatState: this.writeChatState(),
         };
     }
 

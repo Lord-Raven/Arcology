@@ -1,6 +1,5 @@
 import {Stage} from "../Stage";
 import React, {FC} from "react";
-import {Box} from "@mui/material";
 import hiveImageUrl from "../assets/hive.png";
 import {Scene} from "./Scene";
 import {motion} from "framer-motion"
@@ -22,7 +21,7 @@ const SceneImage = ({scene, clipPath, left, top}: SceneImageProps) => (
             position: 'relative',
             left: `${left}%`,
             top: `${top}%`,
-            width: `${20 * RATIO}vh`,
+            width: `${3 * RATIO}vh`,
             height: `3vh`,
         }}
         initial={{opacity: 0}}
@@ -49,14 +48,14 @@ export const Manager: FC<ManagerProps> = ({ stage }) => {
             backgroundSize: 'cover',
             backgroundRepeat: 'no-repeat',
         }}>
-            {stage().saveState.scenes.map((scene) => (
-                <SceneImage
-                    scene={scene}
-                    top={6}
-                    left={50}
-                    clipPath="polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)"
-                />
-            ))}
+            {stage().saveState.districts.map(district => stage().saveState.scenes.find(scene => scene.name == district.defaultSceneId)).map(scene =>
+                scene ? <SceneImage
+                        scene={scene}
+                        top={6.5}
+                        left={50}
+                        clipPath="polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)"
+                /> : <></>
+            )}
         </div>
     );
 }
