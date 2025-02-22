@@ -18,7 +18,7 @@ const SceneImage = ({scene, clipPath, left, top}: SceneImageProps) => (
     <motion.div
         key={scene.name}
         style={{
-            position: 'relative',
+            position: 'absolute',
             left: `${left}%`,
             top: `${top}%`,
             width: `${3 * RATIO}vh`,
@@ -48,10 +48,10 @@ export const Manager: FC<ManagerProps> = ({ stage }) => {
             backgroundSize: 'cover',
             backgroundRepeat: 'no-repeat',
         }}>
-            {stage().saveState.districts.map(district => stage().saveState.scenes.find(scene => scene.name == district.defaultSceneId)).map(scene =>
+            {stage().saveState.districts.map(district => stage().saveState.scenes.find(scene => scene.name == district.defaultSceneId)).map((scene, index) =>
                 scene ? <SceneImage
                         scene={scene}
-                        top={6.5}
+                        top={6.5 * (index + 1)}
                         left={50}
                         clipPath="polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)"
                 /> : <></>

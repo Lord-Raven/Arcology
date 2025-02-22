@@ -5,7 +5,7 @@ import {Emotion} from "./enums/Emotion";
 import {INITIAL_DISTRICTS} from "./District";
 import {INITIAL_SCENES} from "./display/Scene";
 
-const ART_STYLE = 'Messy oil painting, elaborate high-concept art, bold colors and strokes, sci-fi meets lo-fi';
+const ART_STYLE = 'Art direction: Messy oil painting, elaborate high-concept art, bold colors and strokes, sci-fi meets lo-fi';
 
 export async function generateInitialContent(stage: Stage, updateProgress: (progress: number, label: string) => void) {
     updateProgress(0, 'Initializing.');
@@ -57,7 +57,7 @@ export async function generateInitialContent(stage: Stage, updateProgress: (prog
         const scene = stage.saveState.scenes[index];
         updateProgress(10 + (index + 1) * increment, `Generating Imagery for ${scene.name}.`);
         const sceneImage = await generateImage(stage, {
-            prompt: `(${ART_STYLE}). ${scene.essentialDescriptors}. ${scene.description}.`,
+            prompt: `(${ART_STYLE}). Illustrated scenery. ${scene.essentialDescriptors}. ${scene.description}.`,
             negative_prompt: 'people',
             aspect_ratio: AspectRatio.WIDESCREEN_HORIZONTAL,
             remove_background: false
