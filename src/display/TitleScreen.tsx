@@ -48,7 +48,7 @@ export const TitleScreen: FC<TitleScreenProps> = ({ stage, setOnMenu }) => {
                     <>
                         <Box sx={{backgroundColor: '#00000088', width: '80%', color: 'primary', variety: 'h5'}} color={'primary'}>
                             <Typography>
-                                {progress}% - {progressLabel}
+                                {Math.round(progress)}% - {progressLabel}
                             </Typography>
                             <LinearProgress sx={{outline: 'primary'}} variant="determinate" color="success" value={progress}/>
                         </Box>
