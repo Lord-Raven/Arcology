@@ -47,6 +47,7 @@ export const Manager: FC<ManagerProps> = ({ stage }) => {
             backgroundPosition: 'center',
             backgroundSize: 'cover',
             backgroundRepeat: 'no-repeat',
+            position: 'relative'
         }}>
             {stage().saveState.districts.map(district => stage().saveState.scenes.find(scene => scene.name == district.defaultSceneId)).map((scene, index) =>
                 scene ? <SceneImage
@@ -56,7 +57,7 @@ export const Manager: FC<ManagerProps> = ({ stage }) => {
                         clipPath="polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)"
                 /> : <></>
             )}
-            <div style={{width: '90%', position: 'relative', left: '5%', bottom: '5px'}}>
+            <div style={{width: '90%', position: 'absolute', left: '5%', bottom: '5px'}}>
                 <DicePool stage={stage}/>
             </div>
         </div>
