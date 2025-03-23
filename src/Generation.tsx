@@ -5,7 +5,7 @@ import {Emotion} from "./enums/Emotion";
 import {INITIAL_DISTRICTS} from "./District";
 import {INITIAL_SCENES} from "./display/Scene";
 
-const ART_STYLE = 'Art direction: Messy oil painting, elaborate high-concept art, bold colors and strokes, sci-fi meets lo-fi';
+const ART_STYLE = 'Image style: Messy/sketchy detailed concept art, bold colors and strokes, sci-fi meets lo-fi';
 
 export async function generateInitialContent(stage: Stage, updateProgress: (progress: number, label: string) => void) {
     updateProgress(0, 'Initializing.');

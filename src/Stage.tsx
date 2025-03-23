@@ -6,6 +6,8 @@ import {Root} from "./display/Root";
 import {Person} from "./Person";
 import {District} from "./District";
 import {Scene} from "./display/Scene";
+import {Stat} from "./enums/Stat";
+import {Die} from "./Die";
 
 type MessageStateType = any;
 
@@ -18,6 +20,10 @@ type ChatStateType = {
     holoAide: Person,
     districts: District[],
     scenes: Scene[],
+    day: number,
+    statScores: {[stat in Stat]: number},
+    dicePool: Die[],
+    time: number,
 }
 
 export class Stage extends StageBase<InitStateType, ChatStateType, MessageStateType, ConfigType> {
@@ -55,19 +61,19 @@ export class Stage extends StageBase<InitStateType, ChatStateType, MessageStateT
 
         super(data);
         const {
-            characters,         // @type:  { [key: string]: Character }
-            users,                  // @type:  { [key: string]: User}
-            config,                                 //  @type:  ConfigType
-            messageState,                           //  @type:  MessageStateType
-            environment,                     // @type: Environment (which is a string)
-            initState,                             // @type: null | InitStateType
-            chatState                              // @type: null | ChatStateType
+            characters,        // @type: { [key: string]: Character }
+            users,                 // @type: { [key: string]: User}
+            chatState            // @type: null | ChatStateType
         } = data;
         this.saveState = {
             gameInProgress: false,
             holoAide: new Person('','','',''),
             districts: [],
             scenes: [],
+            day: 1,
+            statScores: {Might: 0, Chill: 0, Wits: 0, Guts: 0},
+            dicePool: [new Die(6), new Die(3), new Die(1)],
+            time: 0,
         };
 
         this.character = characters[Object.keys(characters)[0]];

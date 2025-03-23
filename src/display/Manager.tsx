@@ -3,6 +3,7 @@ import React, {FC} from "react";
 import hiveImageUrl from "../assets/hive.png";
 import {Scene} from "./Scene";
 import {motion} from "framer-motion"
+import {DicePool} from "./DicePool";
 
 
 interface SceneImageProps {
@@ -38,7 +39,6 @@ interface ManagerProps {
 
 export const Manager: FC<ManagerProps> = ({ stage }) => {
 
-
     return (
         <div style={{
             width: '100%',
@@ -48,6 +48,7 @@ export const Manager: FC<ManagerProps> = ({ stage }) => {
             backgroundSize: 'cover',
             backgroundRepeat: 'no-repeat',
         }}>
+            <DicePool stage={stage}/>
             {stage().saveState.districts.map(district => stage().saveState.scenes.find(scene => scene.name == district.defaultSceneId)).map((scene, index) =>
                 scene ? <SceneImage
                         scene={scene}
